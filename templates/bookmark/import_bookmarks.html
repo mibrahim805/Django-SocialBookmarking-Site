@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Bookmarks - Social Bookmarking Site</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            color: #004085;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .info-box ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .browser-steps {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .browser-steps h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .browser-step {
+            margin-bottom: 15px;
+        }
+
+        .browser-step strong {
+            color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type='file'],
+        input[type='text'] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type='file']:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type='checkbox'] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .helptext {
+            font-size: 12px;
+            color: #666;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .errorlist {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .errorlist li {
+            background: #fee;
+            color: #c33;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            border-left: 4px solid #c33;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .messages .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .messages .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .messages .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📥 Import Bookmarks</h1>
+        <p class="subtitle">Import your bookmarks from your favorite browser</p>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="browser-steps">
+            <h4>📋 How to Export Bookmarks:</h4>
+
+            <div class="browser-step">
+                <strong>Chrome / Edge:</strong> Bookmark Manager → ⋯ → Export bookmarks
+            </div>
+
+            <div class="browser-step">
+                <strong>Firefox:</strong> Bookmarks → Manage Bookmarks → Import & Backup → Backup
+            </div>
+
+            <div class="browser-step">
+                <strong>Safari:</strong> File → Export Bookmarks
+            </div>
+
+            <div class="browser-step">
+                <strong>Opera:</strong> Settings → Bookmarks → Export bookmarks
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>✅ What Will Be Imported:</h3>
+            <ol>
+                <li>Bookmark title</li>
+                <li>Bookmark URL</li>
+                <li>Bookmark tags (if available)</li>
+                <li>Duplicates will be automatically skipped</li>
+                <li>Invalid URLs will be filtered out</li>
+            </ol>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.html_file.id_for_label }}">{{ form.html_file.label }}</label>
+                {{ form.html_file }}
+                <span class="helptext">{{ form.html_file.help_text }}</span>
+                {% if form.html_file.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.html_file.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div class="checkbox-group">
+                {{ form.is_public }}
+                <label for="{{ form.is_public.id_for_label }}">{{ form.is_public.label }}</label>
+            </div>
+            <span class="helptext">{{ form.is_public.help_text }}</span>
+
+            <button type="submit">📤 Import Bookmarks</button>
+        </form>
+
+        <div class="links">
+            <a href="{% url 'my_bookmarks' %}">← Back to My Bookmarks</a>
+        </div>
+    </div>
+</body>
+</html>
+

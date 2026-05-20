@@ -1,0 +1,487 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{##}
+{#    <title>My Bookmarks</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#    <div#}
+{#        style="#}
+{#            width: 80%;#}
+{#            margin: 40px auto;#}
+{#            font-family: Arial, sans-serif;#}
+{#        "#}
+{#    >#}
+{##}
+{#        <div#}
+{#            style="#}
+{#                display:flex;#}
+{#                justify-content:space-between;#}
+{#                align-items:center;#}
+{#                margin-bottom:30px;#}
+{#            "#}
+{#        >#}
+{##}
+{#            <h1>My Bookmarks</h1>#}
+{##}
+{#            <a#}
+{#                href="{% url 'bookmark_create' %}"#}
+{#                style="#}
+{#                    display:inline-block;#}
+{#                    padding:12px 18px;#}
+{#                    background:black;#}
+{#                    color:white;#}
+{#                    text-decoration:none;#}
+{#                    border-radius:8px;#}
+{#                    font-weight:bold;#}
+{#                "#}
+{#            >#}
+{#                + Create Bookmark#}
+{#            </a>#}
+{##}
+{#        </div>#}
+{##}
+{#        {% if bookmarks %}#}
+{##}
+{#            {% for bookmark in bookmarks %}#}
+{##}
+{#                <div#}
+{#                    style="#}
+{#                        border:1px solid #ddd;#}
+{#                        padding:20px;#}
+{#                        border-radius:10px;#}
+{#                        margin-bottom:20px;#}
+{#                    "#}
+{#                >#}
+{##}
+{#                    <h2 style="margin-bottom:10px;">#}
+{#                        {{ bookmark.title }}#}
+{#                    </h2>#}
+{##}
+{#                    <p style="margin-bottom:10px;">#}
+{##}
+{#                        <a#}
+{#                            href="{{ bookmark.url }}"#}
+{#                            target="_blank"#}
+{#                        >#}
+{#                            {{ bookmark.url }}#}
+{#                        </a>#}
+{##}
+{#                    </p>#}
+{##}
+{#                    <p style="margin-bottom:15px;">#}
+{#                        {{ bookmark.description }}#}
+{#                    </p>#}
+{##}
+{#                    <div style="margin-bottom:10px;">#}
+{##}
+{#                        {% for tag in bookmark.tags.all %}#}
+{##}
+{#                            <span#}
+{#                                style="#}
+{#                                    display:inline-block;#}
+{#                                    background:#f1f1f1;#}
+{#                                    padding:6px 10px;#}
+{#                                    border-radius:20px;#}
+{#                                    margin-right:5px;#}
+{#                                    font-size:14px;#}
+{#                                "#}
+{#                            >#}
+{#                                {{ tag.name }}#}
+{#                            </span>#}
+{##}
+{#                        {% endfor %}#}
+{##}
+{#                    </div>#}
+{##}
+{#                    <small>#}
+{#                        Created:#}
+{#                        {{ bookmark.created_at }}#}
+{#                    </small>#}
+{##}
+{#                </div>#}
+{##}
+{#            {% endfor %}#}
+{##}
+{#        {% else %}#}
+{##}
+{#            <div#}
+{#                style="#}
+{#                    border:1px dashed #aaa;#}
+{#                    padding:30px;#}
+{#                    text-align:center;#}
+{#                    border-radius:10px;#}
+{#                "#}
+{#            >#}
+{##}
+{#                <h3>No bookmarks yet</h3>#}
+{##}
+{#                <p>#}
+{#                    Start by creating your first bookmark.#}
+{#                </p>#}
+{##}
+{#            </div>#}
+{##}
+{#        {% endif %}#}
+{##}
+{#    </div>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookmarks</title>
+</head>
+
+<body>
+
+    <div
+        style="
+            width: 80%;
+            margin: 40px auto;
+            font-family: Arial, sans-serif;
+        "
+    >
+
+        <!-- HEADER SECTION -->
+        <div
+            style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:30px;
+            "
+        >
+
+            <div>
+                <h1>
+                    {% if view_type == 'my' %}
+                        My Bookmarks
+                    {% elif view_type == 'search' %}
+                        Search Results
+                    {% else %}
+                        All Bookmarks
+                    {% endif %}
+                </h1>
+                <small style="color: #666;">Welcome, {{ request.user.username }}!</small>
+            </div>
+
+            <div style="display:flex; gap:10px; align-items:center;">
+                <a
+                    href="{% url 'bookmark_list' %}"
+                    style="
+                        display:inline-block;
+                        padding:8px 14px;
+                        background:{% if view_type == 'all' %}black{% else %}#666{% endif %};
+                        color:white;
+                        text-decoration:none;
+                        border-radius:6px;
+                        font-weight:bold;
+                        font-size:14px;
+                    "
+                >
+                    All Bookmarks
+                </a>
+
+                <a
+                    href="{% url 'my_bookmarks' %}"
+                    style="
+                        display:inline-block;
+                        padding:8px 14px;
+                        background:{% if view_type == 'my' %}black{% else %}#666{% endif %};
+                        color:white;
+                        text-decoration:none;
+                        border-radius:6px;
+                        font-weight:bold;
+                        font-size:14px;
+                    "
+                >
+                    My Bookmarks
+                </a>
+
+                <a
+                    href="{% url 'bookmark_create' %}"
+                    style="
+                        display:inline-block;
+                        padding:12px 18px;
+                        background:black;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:8px;
+                        font-weight:bold;
+                    "
+                >
+                    + Create Bookmark
+                </a>
+
+                <a
+                    href="{% url 'import_bookmarks' %}"
+                    style="
+                        display:inline-block;
+                        padding:12px 18px;
+                        background:#28a745;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:8px;
+                        font-weight:bold;
+                    "
+                >
+                    📥 Import Bookmarks
+                </a>
+
+                <form method="POST" action="{% url 'logout' %}" style="margin: 0;">
+                    {% csrf_token %}
+                    <button
+                        type="submit"
+                        style="
+                            padding:12px 18px;
+                            background:#dc3545;
+                            color:white;
+                            border:none;
+                            border-radius:8px;
+                            font-weight:bold;
+                            cursor:pointer;
+                            font-size:14px;
+                        "
+                    >
+                        Logout
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- SEARCH SECTION -->
+        <div style="margin-bottom:30px;">
+            <form method="GET" action="{% url 'search_bookmarks' %}" style="display: flex; gap: 10px;">
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Search bookmarks by title, description, or tags..."
+                    value="{{ search_query }}"
+                    style="
+                        flex: 1;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        font-size:14px;
+                    "
+                />
+                <button
+                    type="submit"
+                    style="
+                        padding:12px 24px;
+                        background:black;
+                        color:white;
+                        border:none;
+                        border-radius:8px;
+                        font-weight:bold;
+                        cursor:pointer;
+                    "
+                >
+                    Search
+                </button>
+            </form>
+        </div>
+
+        {% if view_type == 'search' and search_query %}
+            <div
+                style="
+                    background:#e7f3ff;
+                    border:1px solid #b3d9ff;
+                    color:#004085;
+                    padding:12px;
+                    border-radius:6px;
+                    margin-bottom:20px;
+                "
+            >
+                Found {{ bookmarks|length }} result{{ bookmarks|length|pluralize }} for "<strong>{{ search_query }}</strong>"
+            </div>
+        {% endif %}
+
+        {% if bookmarks %}
+
+            {% for bookmark in bookmarks %}
+
+                <div
+                    style="
+                        border:1px solid #ddd;
+                        padding:20px;
+                        border-radius:10px;
+                        margin-bottom:20px;
+                    "
+                >
+
+                    <!-- USER + FOLLOW BUTTON -->
+
+                    <div
+                        style="
+                            display:flex;
+                            justify-content:space-between;
+                            align-items:center;
+                            margin-bottom:15px;
+                        "
+                    >
+
+                        <div>
+
+                            <strong>
+                                {{ bookmark.user.username }}
+                            </strong>
+
+                        </div>
+
+                        {% if request.user != bookmark.user %}
+
+                            <form
+                                method="POST"
+                                action="{% url 'user_follow' bookmark.user.id %}"
+                            >
+
+                                {% csrf_token %}
+
+                                {% if bookmark.user.id in following_ids %}
+
+                                    <button
+                                        type="submit"
+                                        style="
+                                            padding:8px 14px;
+                                            border:none;
+                                            border-radius:6px;
+                                            background:red;
+                                            color:white;
+                                            cursor:pointer;
+                                        "
+                                    >
+                                        Unfollow
+                                    </button>
+
+                                {% else %}
+
+                                    <button
+                                        type="submit"
+                                        style="
+                                            padding:8px 14px;
+                                            border:none;
+                                            border-radius:6px;
+                                            background:black;
+                                            color:white;
+                                            cursor:pointer;
+                                        "
+                                    >
+                                        Follow
+                                    </button>
+
+                                {% endif %}
+
+                            </form>
+
+                        {% endif %}
+
+                    </div>
+
+                    <!-- BOOKMARK TITLE -->
+
+                    <h2 style="margin-bottom:10px;">
+                        {{ bookmark.title }}
+                    </h2>
+
+                    <!-- URL -->
+
+                    <p style="margin-bottom:10px;">
+
+                        <a
+                            href="{{ bookmark.url }}"
+                            target="_blank"
+                        >
+                            {{ bookmark.url }}
+                        </a>
+
+                    </p>
+
+                    <!-- DESCRIPTION -->
+
+                    <p style="margin-bottom:15px;">
+                        {{ bookmark.description }}
+                    </p>
+
+                    <!-- TAGS -->
+
+                    <div style="margin-bottom:10px;">
+
+                        {% for tag in bookmark.tags.all %}
+
+                            <span
+                                style="
+                                    display:inline-block;
+                                    background:#f1f1f1;
+                                    padding:6px 10px;
+                                    border-radius:20px;
+                                    margin-right:5px;
+                                    font-size:14px;
+                                "
+                            >
+                                {{ tag.name }}
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- CREATED DATE -->
+
+                    <small>
+                        Created:
+                        {{ bookmark.created_at }}
+                    </small>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div
+                style="
+                    border:1px dashed #aaa;
+                    padding:30px;
+                    text-align:center;
+                    border-radius:10px;
+                "
+            >
+
+                {% if view_type == 'search' %}
+                    <h3>No bookmarks found</h3>
+                    <p>
+                        Try searching with different keywords.
+                    </p>
+                {% elif view_type == 'my' %}
+                    <h3>No bookmarks yet</h3>
+                    <p>
+                        Start by creating your first bookmark.
+                    </p>
+                {% else %}
+                    <h3>No public bookmarks available</h3>
+                    <p>
+                        Be the first to create a bookmark!
+                    </p>
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
