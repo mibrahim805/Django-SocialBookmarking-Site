@@ -266,6 +266,7 @@
             <form method="GET" action="{% url 'search_bookmarks' %}" style="display: flex; gap: 10px;">
                 <input
                     type="text"
+                    id="search-box"
                     name="q"
                     placeholder="Search bookmarks by title, description, or tags..."
                     value="{{ search_query }}"
@@ -482,6 +483,8 @@
         {% endif %}
 
     </div>
+
+    {% include 'keyboard_shortcuts.html' %}
 
 </body>
 </html>

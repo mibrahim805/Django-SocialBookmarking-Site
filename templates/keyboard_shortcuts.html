@@ -1,0 +1,300 @@
+<!-- Keyboard Shortcuts Modal -->
+<div
+    id="keyboard-shortcuts-modal"
+    style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+    "
+>
+    <div
+        style="
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        "
+    >
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0;">⌨️ Keyboard Shortcuts</h2>
+            <button
+                onclick="closeKeyboardShortcuts()"
+                style="
+                    background: none;
+                    border: none;
+                    font-size: 24px;
+                    cursor: pointer;
+                    color: #666;
+                "
+            >
+                ✕
+            </button>
+        </div>
+
+        <div style="border-top: 1px solid #eee; padding-top: 20px;">
+            <h3 style="margin-bottom: 15px; color: #333;">Navigation</h3>
+            <table style="width: 100%; margin-bottom: 25px;">
+                <tr style="border-bottom: 1px solid #f0f0f0; padding: 8px 0;">
+                    <td style="padding: 8px 0; font-weight: 600;">
+                        <kbd style="
+                            background: #f5f5f5;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            font-family: monospace;
+                            display: inline-block;
+                            min-width: 40px;
+                            text-align: center;
+                        ">/</kbd>
+                    </td>
+                    <td style="padding: 8px 0; padding-left: 15px;">Focus search box</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #f0f0f0; padding: 8px 0;">
+                    <td style="padding: 8px 0; font-weight: 600;">
+                        <kbd style="
+                            background: #f5f5f5;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            font-family: monospace;
+                            display: inline-block;
+                            min-width: 40px;
+                            text-align: center;
+                        ">N</kbd>
+                    </td>
+                    <td style="padding: 8px 0; padding-left: 15px;">Create new bookmark</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #f0f0f0; padding: 8px 0;">
+                    <td style="padding: 8px 0; font-weight: 600;">
+                        <kbd style="
+                            background: #f5f5f5;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            font-family: monospace;
+                            display: inline-block;
+                            min-width: 40px;
+                            text-align: center;
+                        ">A</kbd>
+                    </td>
+                    <td style="padding: 8px 0; padding-left: 15px;">View all bookmarks</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #f0f0f0; padding: 8px 0;">
+                    <td style="padding: 8px 0; font-weight: 600;">
+                        <kbd style="
+                            background: #f5f5f5;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            font-family: monospace;
+                            display: inline-block;
+                            min-width: 40px;
+                            text-align: center;
+                        ">M</kbd>
+                    </td>
+                    <td style="padding: 8px 0; padding-left: 15px;">View my bookmarks</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-bottom: 15px; color: #333;">Forms</h3>
+            <table style="width: 100%; margin-bottom: 25px;">
+                <tr style="border-bottom: 1px solid #f0f0f0; padding: 8px 0;">
+                    <td style="padding: 8px 0; font-weight: 600;">
+                        <kbd style="
+                            background: #f5f5f5;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            font-family: monospace;
+                            display: inline-block;
+                            min-width: 100px;
+                            text-align: center;
+                        ">Ctrl + S</kbd>
+                    </td>
+                    <td style="padding: 8px 0; padding-left: 15px;">Submit form</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #f0f0f0; padding: 8px 0;">
+                    <td style="padding: 8px 0; font-weight: 600;">
+                        <kbd style="
+                            background: #f5f5f5;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            font-family: monospace;
+                            display: inline-block;
+                            min-width: 100px;
+                            text-align: center;
+                        ">Esc</kbd>
+                    </td>
+                    <td style="padding: 8px 0; padding-left: 15px;">Close modals</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-bottom: 15px; color: #333;">Help</h3>
+            <table style="width: 100%;">
+                <tr style="border-bottom: 1px solid #f0f0f0; padding: 8px 0;">
+                    <td style="padding: 8px 0; font-weight: 600;">
+                        <kbd style="
+                            background: #f5f5f5;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 4px 8px;
+                            font-family: monospace;
+                            display: inline-block;
+                            min-width: 40px;
+                            text-align: center;
+                        ">?</kbd>
+                    </td>
+                    <td style="padding: 8px 0; padding-left: 15px;">Show this help</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; text-align: right;">
+            <button
+                onclick="closeKeyboardShortcuts()"
+                style="
+                    padding: 10px 20px;
+                    background: black;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-weight: bold;
+                "
+            >
+                Close (Esc)
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function showKeyboardShortcuts() {
+    document.getElementById('keyboard-shortcuts-modal').style.display = 'flex';
+}
+
+function closeKeyboardShortcuts() {
+    document.getElementById('keyboard-shortcuts-modal').style.display = 'none';
+}
+
+// Keyboard shortcuts handler
+document.addEventListener('keydown', function(event) {
+    // Don't trigger shortcuts if user is typing in an input field
+    const activeElement = document.activeElement;
+    const isTypingInInput = activeElement.tagName === 'INPUT' ||
+                           activeElement.tagName === 'TEXTAREA' ||
+                           activeElement.contentEditable === 'true';
+
+    // Skip if typing in search box initially, but allow '/' to focus it
+    if (event.key === '/' && isTypingInInput) {
+        return;
+    }
+
+    // ? - Show keyboard shortcuts
+    if (event.key === '?') {
+        event.preventDefault();
+        showKeyboardShortcuts();
+        return;
+    }
+
+    // Escape - Close modals
+    if (event.key === 'Escape') {
+        closeKeyboardShortcuts();
+        return;
+    }
+
+    // Skip other shortcuts if typing in input/textarea
+    if (isTypingInInput) {
+        return;
+    }
+
+    // / - Focus search box
+    if (event.key === '/') {
+        event.preventDefault();
+        const searchInput = document.getElementById('search-box');
+        if (searchInput) {
+            searchInput.focus();
+            searchInput.select();
+        }
+        return;
+    }
+
+    // N - Create new bookmark
+    if (event.key === 'n' || event.key === 'N') {
+        event.preventDefault();
+        const createBtn = document.querySelector('a[href*="bookmark/create"]');
+        if (createBtn) {
+            window.location.href = createBtn.href;
+        }
+        return;
+    }
+
+    // A - View all bookmarks
+    if (event.key === 'a' || event.key === 'A') {
+        event.preventDefault();
+        const allBookmarksBtn = document.querySelector('a[href*="bookmark_list"]');
+        if (allBookmarksBtn) {
+            window.location.href = allBookmarksBtn.href;
+        }
+        return;
+    }
+
+    // M - View my bookmarks
+    if (event.key === 'm' || event.key === 'M') {
+        event.preventDefault();
+        const myBookmarksBtn = document.querySelector('a[href*="my-bookmarks"]');
+        if (myBookmarksBtn) {
+            window.location.href = myBookmarksBtn.href;
+        }
+        return;
+    }
+
+    // Ctrl/Cmd + S - Submit form
+    if ((event.ctrlKey || event.metaKey) && (event.key === 's' || event.key === 'S')) {
+        event.preventDefault();
+        const form = document.querySelector('form');
+        if (form) {
+            form.submit();
+        }
+        return;
+    }
+});
+
+// Close modal when clicking outside
+document.getElementById('keyboard-shortcuts-modal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        closeKeyboardShortcuts();
+    }
+});
+</script>
+
+<style>
+    @media (max-width: 768px) {
+        #keyboard-shortcuts-modal div:first-child {
+            width: 95% !important;
+        }
+    }
+
+    kbd {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    kbd:hover {
+        background: #f0f0f0 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
+
+
